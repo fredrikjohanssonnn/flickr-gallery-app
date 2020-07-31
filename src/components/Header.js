@@ -2,10 +2,10 @@ import React from 'react';
 import Search from './Search';
 import Navbar from './Navbar';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <React.Fragment>
-      <Search />
+      <Search fetch={props.fetch} />
       <Navbar />
     </React.Fragment>
   );

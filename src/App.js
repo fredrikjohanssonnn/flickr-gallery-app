@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Provider } from './Context';
 import axios from 'axios';
 import apiKey from './config';
 import './App.css';
 
 import Header from './components/Header';
+import PhotoList from './components/PhotoList';
+import NotFound from './components/NotFound';
 
 class App extends Component {
   state = {
     images: [],
-    value: '',
   };
 
   onSearch = (query) => {
     axios
       .get(
-        `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=&format=json&nojsoncallback=1`
+        `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
       )
       .then((res) => {
-        console.log(res.data.photos);
+        this.setState({
+          images: res.data.photos.photo,
+        });
       })
       .catch((err) => {
         console.log('There was an error while trying to fetch the data: ', err);
@@ -28,20 +30,15 @@ class App extends Component {
 
   render() {
     return (
-      <Provider
-        value={{
-          images: this.state.images,
-          actions: {
-            onSearch: this.onSearch,
-          },
-        }}
-      >
-        <BrowserRouter>
-          <div className='container'>
-            <Header />
-          </div>
-        </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+        <div className='container'>
+          <Header fetch={this.onSearch} />
+          <PhotoList images={this.state.images} />
+          <Switch>
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
