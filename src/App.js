@@ -13,25 +13,13 @@ class App extends Component {
     value: '',
   };
 
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.onSearch(this.state.value);
-    e.currentTarget.reset();
-  };
-
   onSearch = (query) => {
     axios
       .get(
         `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=&format=json&nojsoncallback=1`
       )
       .then((res) => {
-        this.setState({
-          images: res.photos.photo,
-        });
+        console.log(res.data.photos);
       })
       .catch((err) => {
         console.log('There was an error while trying to fetch the data: ', err);
@@ -45,8 +33,6 @@ class App extends Component {
           images: this.state.images,
           actions: {
             onSearch: this.onSearch,
-            handleChange: this.handleChange,
-            handleSubmit: this.handleSubmit,
           },
         }}
       >

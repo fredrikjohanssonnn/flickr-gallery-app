@@ -5,19 +5,24 @@ const Search = () => {
   return (
     <Consumer>
       {(context) => {
+        const input = React.createRef();
+
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          context.actions.onSearch(input);
+          e.currentTarget.reset();
+        };
+
         return (
-          <form
-            class='search-form'
-            onSubmit={() => context.actions.handleSubmit()}
-          >
+          <form className='search-form' onSubmit={handleSubmit}>
             <input
               type='search'
               name='search'
               placeholder='Search'
-              onChange={() => context.actions.handleChange()}
+              ref={input}
               required
             />
-            <button type='submit' class='search-button'>
+            <button type='submit' className='search-button'>
               <svg
                 fill='#fff'
                 height='24'
