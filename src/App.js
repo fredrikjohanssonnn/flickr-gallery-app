@@ -13,6 +13,8 @@ class App extends Component {
     images: [],
   };
 
+  componentDidMount() {}
+
   onSearch = (query) => {
     axios
       .get(
@@ -35,6 +37,7 @@ class App extends Component {
           <Header fetch={this.onSearch} />
           <PhotoList images={this.state.images} />
           <Switch>
+            <Route path='/tags/cats' />
             <Route component={NotFound} />
           </Switch>
         </div>
