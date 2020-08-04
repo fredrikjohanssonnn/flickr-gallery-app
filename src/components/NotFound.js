@@ -4,9 +4,9 @@ const NotFound = () => {
   return (
     <div>
       <ul>
-        <li class='not-found'>
-          <h3>No Results Found</h3>
-          <p>You search did not return any results. Please try again.</p>
+        <li className='not-found'>
+          <h3>404 - Page not found</h3>
+          <p>The URL you've entered doesn't seem to exist. Please try again.</p>
         </li>
       </ul>
     </div>

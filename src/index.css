@@ -1,3 +1,7 @@
+:root {
+  --grey: #eeeeee;
+}
+
 body {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
@@ -10,6 +14,10 @@ h2 {
   text-transform: capitalize;
 }
 
+h3 {
+  letter-spacing: 0.1rem;
+}
+
 ul {
   list-style-type: none;
   padding-left: 0;
@@ -17,6 +25,13 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+.box {
+  background-color: var(--grey);
+  padding: 2rem;
+  border-radius: 5px;
+  margin-top: 4rem;
 }
 
 .search-form {
@@ -93,7 +108,7 @@ input {
   width: 100%;
 }
 
-@media only screen and (max-width: 767px)  {
+@media only screen and (max-width: 767px) {
   body {
     padding-top: 2em;
   }
@@ -103,7 +118,7 @@ input {
   }
 }
 
-@media only screen and (min-width: 768px)  {
+@media only screen and (min-width: 768px) {
   body {
     padding-top: 4em;
   }
@@ -117,7 +132,7 @@ input {
     display: flex;
     justify-content: center;
   }
-  
+
   .main-nav li {
     margin: 10px;
     width: 100px;

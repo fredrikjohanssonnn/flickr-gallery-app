@@ -12,7 +12,7 @@ const Navbar = () => {
           <NavLink to='/tags/dogs'>Dogs</NavLink>
         </li>
         <li>
-          <NavLink to='/tags/sunset'>Sunset</NavLink>
+          <NavLink to='/tags/sunsets'>Sunset</NavLink>
         </li>
       </ul>
     </nav>
