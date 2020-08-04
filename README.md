@@ -16,3 +16,5 @@ Then you **need** to add a file to the **/src folder** in this project. If you d
 Save the file and after that you can just type **"yarn/npm start"** to start the project locally. The project will run on **http://localhost:3000**, in case it's available.
 
 To create a **production build**, simply run the command **"yarn/npm build"**. This will create a **build** folder within the project.
+
+If yould would like to read more about Create-react-app (which this project was boostraped with), you can visit their docs at this URL: https://create-react-app.dev/docs/getting-started
