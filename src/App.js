@@ -12,23 +12,23 @@ import Loading from './components/Loading';
 class App extends Component {
   state = {
     images: [],
-    cats: [],
+    foxes: [],
     dogs: [],
     sunsets: [],
     loading: true,
   };
 
   componentDidMount() {
-    const cats = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=cats&per_page=24&format=json&nojsoncallback=1`;
+    const foxes = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=foxes&per_page=24&format=json&nojsoncallback=1`;
     const dogs = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`;
     const sunsets = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=sunsets&per_page=24&format=json&nojsoncallback=1`;
 
     axios
-      .all([axios.get(cats), axios.get(dogs), axios.get(sunsets)])
+      .all([axios.get(foxes), axios.get(dogs), axios.get(sunsets)])
       .then(
-        axios.spread((cats, dogs, sunsets) => {
+        axios.spread((foxes, dogs, sunsets) => {
           this.setState({
-            cats: cats.data.photos.photo,
+            foxes: foxes.data.photos.photo,
             dogs: dogs.data.photos.photo,
             sunsets: sunsets.data.photos.photo,
             loading: false,
@@ -41,6 +41,7 @@ class App extends Component {
   }
 
   onSearch = (query) => {
+    this.setState({ loading: true });
     axios
       .get(
         `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
@@ -48,6 +49,7 @@ class App extends Component {
       .then((res) => {
         this.setState({
           images: res.data.photos.photo,
+          loading: false,
         });
       })
       .catch((err) => {
@@ -60,21 +62,26 @@ class App extends Component {
       <div className='container'>
         <Header fetch={this.onSearch} />
         <Switch>
-          <Route exact path='/' render={() => <Redirect to='/tags/cats' />} />
+          <Route exact path='/' render={() => <Redirect to='/tags/foxes' />} />
           {this.state.loading ? (
             <Loading />
           ) : (
             <Route
               path='/search/:query'
-              render={() => <PhotoList images={this.state.images} />}
+              render={() => (
+                <PhotoList
+                  loading={this.state.loading}
+                  images={this.state.images}
+                />
+              )}
             />
           )}
           {this.state.loading ? (
             <Loading />
           ) : (
             <Route
-              path='/tags/cats'
-              render={() => <PhotoList images={this.state.cats} />}
+              path='/tags/foxes'
+              render={() => <PhotoList images={this.state.foxes} />}
             />
           )}
           {this.state.loading ? (
