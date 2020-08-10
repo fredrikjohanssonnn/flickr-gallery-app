@@ -3,6 +3,7 @@ import Photo from './Photo';
 import NoResults from './NoResults';
 
 const PhotoList = ({ images }) => {
+  /* If the image array contains more than one element, map through the collection and render the Photo component */
   return (
     <div className='photo-container'>
       {images.length ? (

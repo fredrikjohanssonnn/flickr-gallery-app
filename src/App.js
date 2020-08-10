@@ -23,6 +23,10 @@ class App extends Component {
     const dogs = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=dogs&per_page=24&format=json&nojsoncallback=1`;
     const sunsets = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=sunsets&per_page=24&format=json&nojsoncallback=1`;
 
+    /* Using Axios to fetch three requests. Passing each of them into an array.
+    The array then spreads the results into three differens props from each requests.
+    Which are then passed to each state.*/
+
     axios
       .all([axios.get(foxes), axios.get(dogs), axios.get(sunsets)])
       .then(
@@ -39,6 +43,8 @@ class App extends Component {
         console.log('There was an error while trying to fetch the data: ', err);
       });
   }
+
+  /* Set the loading state to true before the request. Then pass it false and add the images requested to the state */
 
   onSearch = (query) => {
     this.setState({ loading: true });
